@@ -13,10 +13,18 @@ namespace Task1
         private readonly T[,] matrix;
         public SquareMatrix(T[,] matrix)
         {
+            double tempSize = Math.Sqrt(matrix.Length);
+            if ((tempSize - (int)tempSize) != 0)
+                throw new ArgumentException("Require square matrix");
             this.matrix = matrix;
-            N = (uint)matrix.Length;
+            N = (uint)tempSize;
         }
 
+        public SquareMatrix(uint n)
+        {
+            N = n;
+            matrix = new T[n,n];
+        }
         protected override Matrix<T> Sum(Matrix<T> lhs, Matrix<T> rhs)
         {
             T[,] matrix = new T[rhs.N, rhs.N];
