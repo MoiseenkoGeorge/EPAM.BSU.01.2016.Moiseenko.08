@@ -10,14 +10,22 @@ namespace ConsoleApl
     {
         static void Main()
         {
-            BinarySearchTree<int> binarySearchTree = new BinarySearchTree<int>();
-            binarySearchTree.Insert(11);
-            binarySearchTree.Insert(12);
-            binarySearchTree.Insert(10);
-            binarySearchTree.Insert(8);
-            binarySearchTree.Insert(9);
-            binarySearchTree.Insert(0);
-            foreach(var item in binarySearchTree.Postorder())
+            BinarySearchTree<int> binarySearchTreeInt = new BinarySearchTree<int>();
+            binarySearchTreeInt.Insert(11,null);
+            binarySearchTreeInt.Insert(12,null);
+            binarySearchTreeInt.Insert(10,new IntComparer());
+            binarySearchTreeInt.Insert(8);
+            binarySearchTreeInt.Insert(9);
+            binarySearchTreeInt.Insert(0);
+            foreach(var item in binarySearchTreeInt.Postorder())
+            {
+                Console.WriteLine(item);
+            }
+            BinarySearchTree<string> binarySearchTreeString = new BinarySearchTree<string>();
+            binarySearchTreeString.Insert("aaa", null);
+            binarySearchTreeString.Insert("bbb");
+            binarySearchTreeString.Insert("ccc",new MyStringComparer());
+            foreach (var item in binarySearchTreeString.Postorder())
             {
                 Console.WriteLine(item);
             }

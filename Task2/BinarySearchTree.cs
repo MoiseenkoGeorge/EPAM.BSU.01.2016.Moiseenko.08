@@ -9,8 +9,27 @@ namespace Task2
     public class BinarySearchTree<T> where T : IComparable<T>
     {
         Node<T> root;
-
-        public void Insert(T value, IComparer<T> comparer = null)
+        public void Insert(T value)
+        {
+            if (value == null)
+                throw new ArgumentNullException();
+            var node = new Node<T>(value);
+            if (root == null)
+                this.root = node;
+            else
+            {
+                Node<T> current = root, parent = null;
+                while (current != null)
+                {
+                    parent = current;
+                    if (value.CompareTo(current.Value) < 0) current = current.Left;
+                    else current = current.Right;
+                }
+                if (value.CompareTo(parent.Value) < 0) parent.Left = node;
+                else parent.Right = node;
+            }
+        }
+        public void Insert(T value, IComparer<T> comparer)
         {
             if (value == null)
                 throw new ArgumentNullException();
@@ -24,31 +43,51 @@ namespace Task2
                 while (current != null)
                 {
                     parent = current;
-                    if (value.CompareTo(current.Value) < 0) current = current.Left;
+                    if (comparer.Compare(value,current.Value) < 0) current = current.Left;
                     else current = current.Right;
                 }
-                if (value.CompareTo(parent.Value) < 0) parent.Left = node;
+                if (comparer.Compare(value, parent.Value) < 0) parent.Left = node;
                 else parent.Right = node;
             }
         }
         public T Search(T key)
         {
+            if (key == null)
+                throw new ArgumentNullException();
             if (key.CompareTo(root.Value) == 0)
                 return this.root.Value;
             else
             {
-                if (key.CompareTo(root.Value) > 0)
-                    if (root.Right != null)
-                        return root.Right.Search(key);
-                    else
-                        throw new ArgumentException("Node wasn't find");
-                else
+                var current = root;
+                while (current != null)
                 {
-                    if (root.Left != null)
-                        return root.Left.Search(key);
-                    else
-                        throw new ArgumentException("Node wasn't find");
+                    var result = key.CompareTo(current.Value);
+                    if (result == 0) return current.Value;
+                    if (result < 0) current = current.Left;
+                    else current = current.Right;
                 }
+                return default(T);
+            }
+        }
+        public T Search(T key, IComparer<T> comparer)
+        {
+            if (key == null)
+                throw new ArgumentNullException();
+            if (comparer == null)
+                comparer = Comparer<T>.Default; 
+            if (comparer.Compare(key,root.Value) == 0)
+                return this.root.Value;
+            else
+            {
+                var current = root;
+                while (current != null)
+                {
+                    var result = comparer.Compare(key,root.Value);
+                    if (result == 0) return current.Value;
+                    if (result < 0) current = current.Left;
+                    else current = current.Right;
+                }
+                return default(T);
             }
         }
         public IEnumerable<T> Inorder()
@@ -118,11 +157,6 @@ namespace Task2
         {
             root = null;
         }
-        public bool IsEmpty()
-        {
-            if (root == null)
-                return true;
-            return false;
-        }
+        public bool IsEmpty() => root == null;
     }
 }
