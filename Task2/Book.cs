@@ -10,7 +10,11 @@ namespace Task2
     {
         public string Name { get; private set; }
         public string Author { get; private set; }
-
+        public Book(string name, string author)
+        {
+            Name = name;
+            Author = author;
+        }
         public int CompareTo(Book other)
         {
             return Author.CompareTo(other.Author);

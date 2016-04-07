@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BinarySearchTree.cs" />
     <Compile Include="Book.cs" />
+    <Compile Include="BookComparer.cs" />
     <Compile Include="IntComparer.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

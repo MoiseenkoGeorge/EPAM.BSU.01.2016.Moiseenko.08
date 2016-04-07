@@ -29,6 +29,17 @@ namespace ConsoleApl
             {
                 Console.WriteLine(item);
             }
+            var book1 = new Book("1", "1");
+            var book2 = new Book("2", "2");
+            var book3 = new Book("3", "3");
+            BinarySearchTree<Book> bookTree = new BinarySearchTree<Book>();
+            bookTree.Insert(book1);
+            bookTree.Insert(book2,null);
+            bookTree.Insert(book3, new BookComparer());
+            foreach (var item in bookTree.Postorder())
+            {
+                Console.WriteLine(item.Author + item.Name);
+            }
             Console.ReadKey();
         }
     }
