@@ -35,7 +35,7 @@ namespace Task1
             {
                 T[] matrix = new T[additionalMatrix.N];
                 for (uint i = 0; i < matrix.Length; i++)
-                    matrix[i] = (dynamic) currentMatrix[i, i] + (dynamic) additionalMatrix[i, i];
+                    matrix[i] = (dynamic) currentMatrix[i, i] + additionalMatrix[i, i];
                 return new DiagonalMatrix<T>(matrix);
             }
             else
@@ -43,7 +43,7 @@ namespace Task1
                 T[,] matrix = new T[currentMatrix.N,currentMatrix.N];
                 for (uint i = 0; i < currentMatrix.N; i++)
                     for (uint j = 0; j < currentMatrix.N; j++)
-                        matrix[i, j] = (dynamic) currentMatrix[i, j] + (dynamic) additionalMatrix[i, j];
+                        matrix[i, j] = (dynamic)currentMatrix[i, j] + additionalMatrix[i, j];
                 if(additionalMatrix is SimmetricMatrix<T>) return new SimmetricMatrix<T>(matrix);
                 return new SquareMatrix<T>(matrix);
             }

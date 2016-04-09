@@ -19,7 +19,7 @@ namespace Task1
         public uint N { get; protected set; }
         protected abstract T GetElement(uint x, uint y);
         protected abstract void SetElement(uint x, uint y, T value);
-        protected abstract Matrix<T> Sum(Matrix<T> currentMatrix, Matrix<T> additionalMatrix);
+        
         public T this[uint x, uint y]
         {
             get
